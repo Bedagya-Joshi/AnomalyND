@@ -17,6 +17,7 @@ Deliverables:
 
 Basic understanding of network traffic analysis concepts.
 Ability to capture and analyze network traffic using Wireshark.
+
 Phase 2: Exploring Machine Learning for Anomaly Detection (1.5 Months)
 
 Activities (2 hours/day):
@@ -35,6 +36,7 @@ Deliverables:
 Grasp of Machine Learning concepts, specifically anomaly detection.
 Understanding of a chosen anomaly detection algorithm (Isolation Forest or One-Class SVM).
 Familiarity with a Python library for Machine Learning (scikit-learn).
+
 Phase 3: Data Acquisition and Preprocessing (1 Month)
 
 Activities (2 hours/day):
@@ -51,6 +53,7 @@ Deliverables:
 
 A suitable network traffic dataset for anomaly detection.
 Preprocessed data ready for Machine Learning model training.
+
 Phase 4: Building and Training the Anomaly Detection Model (1 Month)
 
 Activities (2 hours/day):
