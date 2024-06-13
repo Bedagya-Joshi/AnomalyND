@@ -1,0 +1,32 @@
+Network Layer:
+
+Source IP Address: The IP address of the device sending the packet.
+Destination IP Address: The IP address of the device receiving the packet.
+Protocol: The protocol used for communication (e.g., TCP, UDP, ICMP).
+Source Port: The port number used by the sending application.
+Destination Port: The port number used by the receiving application.
+Packet Length: The total size of the packet in bytes.
+Transport Layer (if applicable):
+
+Sequence Number (TCP only): A unique number used for in-order delivery of packets in a TCP conversation.
+Acknowledgement Number (TCP only): The sequence number of the next byte the sender expects to receive from the receiver (TCP only).
+Flags (TCP only): Control flags like SYN, FIN, PSH, URG, etc. (TCP only).
+Window Size (TCP only): The amount of data (in bytes) the receiver is willing to accept without an acknowledgement (TCP only).
+Application Layer (if possible):
+
+HTTP Method (if HTTP): The HTTP verb used in the request (e.g., GET, POST, PUT, etc.).
+HTTP Request URI (if HTTP): The path and query string of the requested resource (e.g., /index.html?param=value).
+DNS Query Name (if DNS): The domain name being requested for resolution.
+Application Data (limited): Capturing a small portion of the application data payload might be useful depending on the application protocol. Be mindful of privacy concerns.
+Additional Considerations:
+
+Timestamp: Capture the timestamp of each packet to analyze traffic patterns over time.
+Interpacket Time (derived): Calculate the time difference between consecutive packets for a connection to analyze flow characteristics.
+Flags and Options (protocol specific): Capture relevant flags and options specific to the protocol being used (e.g., ICMP type and code).
+Packet Count: Track the total number of packets captured for each flow or connection.
+Remember:
+
+The specific fields you capture will depend on the type of network traffic you're interested in and the specific anomalies you're trying to detect.
+Capturing too much data can increase storage requirements and processing time.
+Be mindful of privacy concerns when capturing application data.
+By capturing a rich set of features  and labeling your data appropriately (normal vs. anomaly), you can train effective One-class SVM and Isolation Forest models for network anomaly detection.
