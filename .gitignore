@@ -1,0 +1,6 @@
+*.txt
+!requirements.txt
+
+*.pcapng
+
+*.docx

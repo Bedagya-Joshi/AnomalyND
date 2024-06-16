@@ -1,0 +1,6 @@
+numpy
+scikit-learn
+pandas
+isolation-forest
+matplotlib
+seaborn
