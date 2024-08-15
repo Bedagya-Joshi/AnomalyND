@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Anomaly Detector</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <nav>
+        </nav>
+
+    <div class="content">
+        {% block content %}
+        {% endblock content %}
+    </div>
+
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>

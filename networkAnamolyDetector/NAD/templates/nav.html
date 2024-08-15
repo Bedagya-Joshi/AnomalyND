@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Anomaly Detector</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <nav>
+        <img id="logo" src="{% static 'logo.png' %}" alt="Logo">
+        <ul>
+            <li><a href="{% url 'home' %}">Dashboard</a></li>
+            <li><a href="{% url 'reports' %}">Reports</a></li>
+            <li><a href="{% url 'notifications' %}">Notifications</a></li>
+        </ul>
+        <div class="user-profile">
+            <img id="notification" src="{% static 'notification.png' %}" alt="Notification">
+            <img id="profile" src="{% static 'profile.png' %}" alt="Profile" class="profile-image">
+            <div class="dropdown-content" id="profileDropdownContent">
+                <p>Hello! {{ user.username }}</p>
+                <a href="{% url 'login' %}">Logout</a>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>

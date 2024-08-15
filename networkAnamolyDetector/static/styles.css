@@ -1,0 +1,104 @@
+nav {
+    background-color: #f2f2f2;
+    /* padding: 10px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 50px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+#logo{
+    width: auto;
+    height: 70px;
+    margin-right: 300px;
+}
+
+#notification{
+    padding-left: 200px;
+    width: 40px;
+    height: auto;
+    cursor: pointer;
+}
+
+#profile{
+    width: 40px;
+    margin-left: 50px;
+    height: auto;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    align-items: center;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-top:1px;
+    margin-left:  180px;
+}
+
+.dropdown-content.show {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.login-form {
+    background-color: #f2f2f2;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    width: 75%;
+    height: 75vh;
+    margin: 0 auto;
+    font-size: larger;
+    text-align: center;
+    /* Center the content within the form */
+}
+
+.button-container {
+    margin-top: 20px;
+    width: auto;
+    height: 100px;
+    /* Make the button container full width */
+    text-align: center;
+}
+
+.button-container button {
+    padding: 5px 15px;
+    /* Adjust padding for larger button size */
+    font-size: 18px;
+}
+
+.login-form li{
+    margin-top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: red;
+}
+.login-form p{
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-weight: 900;
+    font-size: larger;
+}

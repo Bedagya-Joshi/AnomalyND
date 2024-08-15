@@ -4,3 +4,4 @@ pandas
 isolation-forest
 matplotlib
 seaborn
+django
