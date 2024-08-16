@@ -2,5 +2,22 @@
 
 {% block content %}
 {% include 'nav.html' %}
-<h1>Reports Page</h1>
+<div id="start">
+    <h1>Reports Page</h1>
+</div>
+<div id="filters">
+    <p>Download Sample Excel</p>
+    <p>Upload Excel</p>
+    <p>Date Picker</p>
+</div><br>
+<div id="reports">
+    <ul id="netResults">
+        <li>Source Ip</li>
+        <li>Destination IP</li>
+        <li>Port</li>
+        <li>Protocol</li>
+        <li>Length</li>
+        <li>Info</li>
+    </ul>
+</div>
 {% endblock content %}

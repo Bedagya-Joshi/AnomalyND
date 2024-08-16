@@ -28,17 +28,26 @@ nav ul li a {
 }
 
 #notification{
-    padding-left: 300px;
+    margin-left: 150px;
     width: 40px;
     height: auto;
     cursor: pointer;
 }
 
+#hrefNoti {
+    display: inline-block;
+    width: 40px;
+}
+
 #profile{
     width: 40px;
-    margin-left: 50px;
+    margin-left: 200px;
     height: auto;
     cursor: pointer;
+}
+
+#navUL{
+    margin-right: 150px;
 }
 
 .dropdown-content {
@@ -50,7 +59,7 @@ nav ul li a {
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     margin-top: 10px;
-    margin-left:  180px;
+    margin-left:  10.7%;
 }
 
 .dropdown-content.show {
@@ -59,6 +68,7 @@ nav ul li a {
     align-items: center;
     padding-bottom: 10px;
 }
+
 
 .login-form {
     background-color: #f2f2f2;
@@ -161,4 +171,23 @@ nav ul li a {
     display: flex;
     margin-top:30px;
     justify-content: center;
+}
+
+#filters{
+    display: flex;
+    justify-content: flex-end;
+}
+
+#filters p{
+    padding: 0px 30px;
+}
+
+#reports{
+    padding-bottom: 1000px;
+    background: #00000044;
+}
+
+#notifPanel{
+    background: #00000069;
+    padding-bottom: 500px;
 }

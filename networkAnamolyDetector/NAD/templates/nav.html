@@ -10,13 +10,12 @@
 <body>
     <nav>
         <img id="logo" src="{% static 'logo.png' %}" alt="Logo">
-        <ul>
+        <ul id="navUL">
             <li><a href="{% url 'home' %}">Dashboard</a></li>
             <li><a href="{% url 'reports' %}">Reports</a></li>
-            {% comment %} <li><a href="{% url 'notifications' %}">Notifications</a></li> {% endcomment %}
         </ul>
         <div class="user-profile">
-            <a href="{% url 'notifications' %}"><img id="notification" src="{% static 'notification.png' %}" alt="Notification"></a>
+            <a id="hrefNoti" href="{% url 'notifications' %}"><img id="notification" src="{% static 'notification.png' %}" alt="Notification"></a>  
             <img id="profile" src="{% static 'profile.png' %}" alt="Profile" class="profile-image">
             <div class="dropdown-content" id="profileDropdownContent">
                 <p>Hello! {{ user.username }}</p>
