@@ -2,5 +2,26 @@
 
 {% block content %}
 {% include 'nav.html' %}
-<h1>Home Page</h1>
+{% load static %}
+<h1>Dashboard</h1>
+<div id="dashboard">
+    <div id="results">
+        <ul id="netResults">
+            <li>Source Ip</li>
+            <li>Destination IP</li>
+            <li>Port</li>
+            <li>Protocol</li>
+            <li>Length</li>
+            <li>Info</li>
+        </ul>
+    </div>
+    <div id="capture">
+        <button id="toggleBtn" style="height: 50px;">
+            <img src={% static "off.png"%} alt="Off" id="off" class="active" style="margin-top: 150px;">
+            <img src={% static "on.png"%} alt="On" id="on" style="margin-top: 150px;">
+            <span id="status">Start Capturing</span>
+        </button>
+    <a id="details" href="{% url 'reports' %}">Show Detailed Report</a></li>
+    </div>
+</div>
 {% endblock content %}

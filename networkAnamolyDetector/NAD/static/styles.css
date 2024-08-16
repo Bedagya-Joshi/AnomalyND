@@ -1,6 +1,5 @@
 nav {
     background-color: #f2f2f2;
-    /* padding: 10px; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,11 +24,11 @@ nav ul li a {
 #logo{
     width: auto;
     height: 70px;
-    margin-right: 300px;
+    margin-right: 400px;
 }
 
 #notification{
-    padding-left: 200px;
+    padding-left: 300px;
     width: 40px;
     height: auto;
     cursor: pointer;
@@ -72,20 +71,17 @@ nav ul li a {
     margin: 0 auto;
     font-size: larger;
     text-align: center;
-    /* Center the content within the form */
 }
 
 .button-container {
     margin-top: 20px;
     width: auto;
     height: 100px;
-    /* Make the button container full width */
     text-align: center;
 }
 
 .button-container button {
     padding: 5px 15px;
-    /* Adjust padding for larger button size */
     font-size: 18px;
 }
 
@@ -101,4 +97,68 @@ nav ul li a {
     margin-bottom: 15px;
     font-weight: 900;
     font-size: larger;
+}
+
+#results{
+    background: #00000038;
+    padding-bottom: 450px;
+    flex: 1;
+}
+
+#capture{
+    padding-left: 10px;
+}
+
+#dashboard{
+    display: flex;
+}
+
+#netResults{
+    display: flex;
+    list-style: none;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#netResults li:nth-last-child(1){
+    margin-right: 150px;
+}
+
+#toggleBtn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    position: relative;
+    margin:0;
+    padding:0;
+    width: 200px;
+}
+
+#toggleBtn img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 50px;
+    display:none;
+}
+
+#toggleBtn .active {
+    display: block;
+}
+
+#status {
+    position: relative;
+    display:flex;
+    margin-top: 173px;
+    padding-left:170px;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+}
+
+#details{
+    display: flex;
+    margin-top:30px;
+    justify-content: center;
 }

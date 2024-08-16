@@ -13,10 +13,10 @@
         <ul>
             <li><a href="{% url 'home' %}">Dashboard</a></li>
             <li><a href="{% url 'reports' %}">Reports</a></li>
-            <li><a href="{% url 'notifications' %}">Notifications</a></li>
+            {% comment %} <li><a href="{% url 'notifications' %}">Notifications</a></li> {% endcomment %}
         </ul>
         <div class="user-profile">
-            <img id="notification" src="{% static 'notification.png' %}" alt="Notification">
+            <a href="{% url 'notifications' %}"><img id="notification" src="{% static 'notification.png' %}" alt="Notification"></a>
             <img id="profile" src="{% static 'profile.png' %}" alt="Profile" class="profile-image">
             <div class="dropdown-content" id="profileDropdownContent">
                 <p>Hello! {{ user.username }}</p>
