@@ -3,9 +3,15 @@ from sklearn.ensemble import IsolationForest
 import joblib
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
-data = pd.read_csv('your_training_data.csv')
+data = pd.read_csv('preprocessed_data.csv')
 
-categorical_cols = ['protocol']
+data['timestamp'] = pd.to_datetime(data['timestamp'])  
+data['hour_of_day'] = data['timestamp'].dt.hour
+
+average_bandwidth = data.groupby('hour_of_day')['length'].mean().to_dict()
+joblib.dump(average_bandwidth, 'average_bandwidth.pkl') 
+
+categorical_cols = ['protocol', 'hour_of_day']
 numerical_cols = ['src_port', 'dst_port', 'length']
 
 encoder = OneHotEncoder(handle_unknown='ignore')

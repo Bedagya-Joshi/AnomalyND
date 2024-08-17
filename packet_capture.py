@@ -19,6 +19,11 @@ one_class_svm_scaler = joblib.load('one_class_svm_scaler.pkl')
 
 average_bandwidth = joblib.load('average_bandwidth.pkl') 
 
+overall_average_bandwidth = sum(average_bandwidth.values()) / 24 
+overall_bandwidth_threshold = overall_average_bandwidth * 2
+
+known_ips = set() 
+
 def get_connection_name_from_guid(iface_guids):
     iface_names = ['(unknown)' for i in range(len(iface_guids))]
     reg = wr.ConnectRegistry(None, wr.HKEY_LOCAL_MACHINE)
@@ -38,7 +43,7 @@ def get_active_interface(preferred_type='Ethernet'):
     for i, iface_guid in enumerate(iface_guids):
         addrs = ni.ifaddresses(iface_guid)
         if ni.AF_INET in addrs and addrs[ni.AF_INET][0]['addr'] != '127.0.0.1':
-            if preferred_type in iface_names[i]: 
+            if preferred_type in iface_names[i]:
                 return iface_names[i]
 
     for i, iface_guid in enumerate(iface_guids):
@@ -74,7 +79,11 @@ def process_packet(packet, output_file):
         length = len(packet)
         size = len(packet) * 8
 
-        packet_data = pd.DataFrame([[src_ip, dst_ip, src_port, dst_port, protocol, length]], columns=['src_ip', 'dst_ip', 'src_port', 'dst_port', 'protocol', 'length'])
+        timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
+
+        packet_data = pd.DataFrame([[src_ip, dst_ip, src_port, dst_port, protocol, length, timestamp]],
+                                   columns=['src_ip', 'dst_ip', 'src_port', 'dst_port', 'protocol', 'length', 'timestamp'])
+        
         packet_data = preprocess_data(packet_data, one_class_svm_encoder, one_class_svm_scaler)
 
         isolation_forest_prediction = isolation_forest_model.predict(packet_data)
@@ -84,7 +93,7 @@ def process_packet(packet, output_file):
 
         if isolation_forest_prediction == -1 or one_class_svm_prediction == -1:
             with open(output_file, 'a') as f:
-                f.write(f"{time.ctime()} | {' | '.join(map(str, [src_ip, src_port, dst_ip, dst_port, length, size, info, category, anomaly_type, threat_level]))}\n")
+                f.write(f"{timestamp} | {' | '.join(map(str, [src_ip, src_port, dst_ip, dst_port, length, size, info, category, threat_level]))}\n")
 
     except:
         pass
@@ -100,9 +109,7 @@ def preprocess_data(data, encoder, scaler):
 
     return data
 
-def categorize_anomaly(isolation_forest_prediction, one_class_svm_prediction, packet):
-    """Combines predictions and categorizes the anomaly."""
-
+def categorize_anomaly(isolation_forest_prediction, one_class_svm_prediction, packet, average_bandwidth):
     if isolation_forest_prediction == -1 or one_class_svm_prediction == -1:
         is_anomaly = True
     else:
@@ -111,29 +118,21 @@ def categorize_anomaly(isolation_forest_prediction, one_class_svm_prediction, pa
     if not is_anomaly:
         return "Normal", "None", "None"
 
-    # Placeholder for tracking known IPs (you might need a more persistent mechanism)
-    known_ips = set()  
-
-    # 1. Categorize based on IP
     if packet[scapy.IP].src not in known_ips:
-        known_ips.add(packet[scapy.IP].src)  # Add new IP to known_ips
+        known_ips.add(packet[scapy.IP].src)
         return "IP", "New IP", "Minimal"
-    # You'll need additional logic to identify "unusual" IPs (e.g., based on geolocation, blacklists, etc.)
-    # Placeholder for demonstration:
-    elif packet[scapy.IP].src.startswith('10.') : # Example: Treat IPs starting with '10.' as unusual
+
+    elif packet[scapy.IP].src.startswith('10.') : 
         return "IP", "Unusual/Suspicious IP", "Average"
 
-    # 2. Categorize based on Bandwidth (you'll need to define 'high_bandwidth_threshold')
     current_hour = time.localtime().tm_hour
-    high_bandwidth_threshold = average_bandwidth[current_hour] * 1.5  # Example: Threshold is 1.5 times the average
-    if packet.length > high_bandwidth_threshold:
-        if 9 <= current_hour <= 11: 
-            return "Bandwidth", "High bandwidth usage on a time that should not happen", "Average"
-        else:
-            return "Bandwidth", "Very high bandwidth usage", "Critical"
+    hourly_bandwidth_threshold = average_bandwidth.get(current_hour, 0) * 1.5
 
+    if packet.length > hourly_bandwidth_threshold:
+        return "Bandwidth", "High bandwidth usage on a time that should not happen", "Average"
+    elif packet.length > overall_bandwidth_threshold:
+        return "Bandwidth", "Very high bandwidth usage", "Critical"
 
-    # 3. Categorize as Suspicious Activity (fallback)
     return "Suspicious Activity", "Suspicious/unusual network activity", "Critical"
 
 if __name__ == "__main__":
@@ -144,4 +143,4 @@ if __name__ == "__main__":
         print(f"Sniffing on interface: {interface}")
         sniff_wifi(interface, output_file)
     else:
-        print("Error: No active network interface found.")
+        print("Error: No active network interface found.") 
