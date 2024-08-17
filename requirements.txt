@@ -5,3 +5,5 @@ isolation-forest
 matplotlib
 seaborn
 django
+scapy
+time
