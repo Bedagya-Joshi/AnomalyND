@@ -25,14 +25,14 @@ def get_active_interface(preferred_type='Ethernet'):
     for i, iface_guid in enumerate(iface_guids):
         addrs = ni.ifaddresses(iface_guid)
         if ni.AF_INET in addrs and addrs[ni.AF_INET][0]['addr'] != '127.0.0.1':
-            if preferred_type in iface_names[i]: 
+            if preferred_type in iface_names[i]:
                 return iface_names[i]
 
     for i, iface_guid in enumerate(iface_guids):
         addrs = ni.ifaddresses(iface_guid)
         if ni.AF_INET in addrs and addrs[ni.AF_INET][0]['addr'] != '127.0.0.1':
             return iface_names[i]
-    return None  
+    return None
 
 def sniff_wifi(interface):
     try:
@@ -50,7 +50,7 @@ def process_packet(packet):
             src_port = packet[scapy.TCP].sport
             dst_port = packet[scapy.TCP].dport
             protocol = "TCP"
-        else: 
+        else:
             src_port = packet[scapy.UDP].sport
             dst_port = packet[scapy.UDP].dport
             protocol = "UDP"
